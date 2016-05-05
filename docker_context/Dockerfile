@@ -36,7 +36,10 @@ RUN SWIFT_PKG=swift-DEVELOPMENT-SNAPSHOT-2016-04-25-a && \
     mkdir /projects && \
     useradd -m -u 1000 swift -g users -s /bin/bash
 
-# workaround "runtime does not come first" error 
-RUN mv /usr/lib/lldb /usr/lib/lldb-disabled  
+# workarounds 
+# "runtime does not come first" error 
+# CoreFoundation module.modulemap permission error
+RUN mv /usr/lib/lldb /usr/lib/lldb-disabled && \
+    chmod o+r /usr/lib/swift/CoreFoundation/*
 
 USER swift
